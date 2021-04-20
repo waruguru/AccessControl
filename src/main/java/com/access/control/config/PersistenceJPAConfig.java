@@ -35,9 +35,9 @@ public class PersistenceJPAConfig {
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/jwt_db");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/sb_access_control");
         dataSource.setUsername( "postgres" );
-        dataSource.setPassword( "" );
+        dataSource.setPassword( "root" );
         return dataSource;
     }
     @Bean
