@@ -9,9 +9,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 //@EnableAutoConfiguration(exclude = { ErrorMvcAutoConfiguration.class })
-@ComponentScan(basePackages = {"com.access.control"})
-//@EntityScan("com.access.control.model")
-@EnableJpaRepositories("com.access.control.repository")
+@ComponentScan(basePackages = {"com.access.control.models"})
+@EntityScan("com.access.control.model")
+//@EnableJpaRepositories("com.access.control.repository")
+@EnableJpaRepositories
+
 public class AccessControlSystemApplication {
 
 	public static void main(String[] args) {
