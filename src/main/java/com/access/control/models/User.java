@@ -3,7 +3,6 @@ package com.access.control.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue
@@ -32,12 +31,12 @@ public class User {
     private String gender;
     @Column
     private String age;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id", nullable = false)
-    private Roles role;
-    @ManyToOne
-    @JoinColumn(name = "institution_id", nullable = false)
-    private Institution institution;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "role_id", nullable = false)
+//    private Roles role;
+//    @ManyToOne
+//    @JoinColumn(name = "institution_id", nullable = false)
+//    private Institution institution;
 
     public User() {
     }
@@ -152,19 +151,19 @@ public class User {
         this.age = age;
     }
 
-    public Roles getRole() {
-        return role;
-    }
-
-    public void setRole(Roles role) {
-        this.role = role;
-    }
-
-    public Institution getInstitution() {
-        return institution;
-    }
-
-    public void setInstitution(Institution institution) {
-        this.institution = institution;
-    }
+//    public Roles getRole() {
+//        return role;
+//    }
+//
+//    public void setRole(Roles role) {
+//        this.role = role;
+//    }
+//
+//    public Institution getInstitution() {
+//        return institution;
+//    }
+//
+//    public void setInstitution(Institution institution) {
+//        this.institution = institution;
+//    }
 }

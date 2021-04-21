@@ -1,18 +1,18 @@
 package com.access.control.models;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
 public class Roles {
     @Id
     private long id;
     private String name;//admin, supervisor or regular officer.
-    @OneToMany(mappedBy = "permissions")
+    @Column
     private List<String>  permissions;
     private long userId;
     @OneToMany(mappedBy = "user")

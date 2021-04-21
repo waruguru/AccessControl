@@ -1,11 +1,10 @@
 package com.access.control.models;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
-@Entity
 public class Site {
+    @Id
+    @GeneratedValue
     private long id;
     private String name;
     private String location;
@@ -17,5 +16,17 @@ public class Site {
     public Site(String name, String location) {
         this.name = name;
         this.location = location;
+    }
+
+    public Site() {
+
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

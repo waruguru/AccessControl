@@ -1,10 +1,10 @@
 package com.access.control.controller;
 
 import com.access.control.models.User;
-import com.access.control.security.JwtRequest;
-import com.access.control.security.JwtResponse;
+import com.access.control.models.JwtRequest;
+import com.access.control.models.JwtResponse;
 import com.access.control.security.JwtTokenUtil;
-import com.access.control.security.JwtUserDetailsService;
+import com.access.control.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -1,4 +1,4 @@
-package com.access.control.security;
+package com.access.control.service;
 
 import com.access.control.models.User;
 import com.access.control.repository.UserRepository;
@@ -14,13 +14,13 @@ import java.util.ArrayList;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
+        User user = userService.findByUserName(username);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
@@ -32,6 +32,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         User newUser = new User();
         newUser.setUserName(user.getUserName());
         newUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-        return userRepository.save(newUser);
+        return userService.save(newUser);
     }
 }

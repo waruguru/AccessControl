@@ -5,7 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -20,14 +22,16 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@EnableJpaAuditing
 public class PersistenceJPAConfig {
 
-    @Bean
+    @Bean(name="entityManagerFactory")
+    @Primary
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em
                 = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.access.control.models.User","com.access.control.models.Institution");
+        em.setPackagesToScan("com.access.control.models");
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -35,15 +39,7 @@ public class PersistenceJPAConfig {
 
         return em;
     }
-    @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            EntityManagerFactoryBuilder builder) {
-        return builder
-                .dataSource(dataSource())
-                .packages(User.class)
-                .persistenceUnit("users")
-                .build();
-    }
+
 
 
     @Bean

@@ -1,4 +1,4 @@
-package com.access.control.security;
+package com.access.control.models;
 
 import java.io.Serializable;
 
