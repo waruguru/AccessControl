@@ -46,10 +46,15 @@ public class PersistenceJPAConfig {
     @ConfigurationProperties(prefix="spring.datasource")
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/sb_access_control");
-        dataSource.setUsername( "postgres" );
+        dataSource.setDriverClassName("org.mysql.Driver");
+//        sets the path to jbdc:mysql://localost:5432/sb_access_control(db hosted on computer port 5432
+        dataSource.setUrl("jdbc:mysql://localhost:5432/sb_access_control");
+        dataSource.setUsername( "jmuriithi" );
         dataSource.setPassword( "root" );
+//        jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
+//        jpa.hibernate.ddl-auto = update
+//        springdoc.api-docs.path=/api-docs
+
         return dataSource;
     }
     @Bean
@@ -68,7 +73,7 @@ public class PersistenceJPAConfig {
     Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
 
         return properties;
     }
