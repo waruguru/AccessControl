@@ -1,8 +1,7 @@
 package com.access.control.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +15,7 @@ public class MainController {
 //        this.userService = userService;
 //    }
 
-    @RequestMapping("/home")
+    @RequestMapping(value = "/", produces = {MediaType.APPLICATION_JSON_VALUE})
     private String index() {
         return "Joyce";
     }

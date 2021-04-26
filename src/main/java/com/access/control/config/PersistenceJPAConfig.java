@@ -1,15 +1,13 @@
 package com.access.control.config;
 
-import com.access.control.models.User;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -24,8 +22,19 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaAuditing
 public class PersistenceJPAConfig {
+    @Value("${spring.datasource.driver-class-name}")
+    private String driverClassName;
+    @Value("${spring.datasource.jdbcUrl}")
+    private String dbUrl;
+    @Value("${spring.datasource.username}")
+    private String dbUserName;
+    @Value("${spring.datasource.password}")
+    private String dbPassWord;
+    @Value("${spring.jpa.properties.hibernate.dialect}")
+    private String hibernateDialect;
 
-    @Bean(name="entityManagerFactory")
+
+    @Bean(name = "entityManagerFactory")
     @Primary
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em
@@ -41,22 +50,19 @@ public class PersistenceJPAConfig {
     }
 
 
-
     @Bean
-    @ConfigurationProperties(prefix="spring.datasource")
-    public DataSource dataSource(){
+    @ConfigurationProperties(prefix = "spring.datasource")
+    public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.mysql.Driver");
-//        sets the path to jbdc:mysql://localost:5432/sb_access_control(db hosted on computer port 5432
-        dataSource.setUrl("jdbc:mysql://localhost:5432/sb_access_control");
-        dataSource.setUsername( "jmuriithi" );
-        dataSource.setPassword( "root" );
-//        jpa.properties.hibernate.dialect = org.hibernate.dialect.MySQL5InnoDBDialect
-//        jpa.hibernate.ddl-auto = update
-//        springdoc.api-docs.path=/api-docs
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(dbUrl);
+        dataSource.setUsername(dbUserName);
+        dataSource.setPassword(dbPassWord);
+
 
         return dataSource;
     }
+
     @Bean
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -66,14 +72,14 @@ public class PersistenceJPAConfig {
     }
 
     @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
+    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
     Properties additionalProperties() {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 
         return properties;
     }

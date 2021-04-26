@@ -17,10 +17,10 @@ public class UserService {
        return userRepository.save(user);
     }
     @Transactional(readOnly = true)
-    public User findByUserName(String  userName) {
+    public User findByUsername(String  userName) {
 
 
-        return userRepository.findByUserName(userName);
+        return userRepository.findByUsername(userName);
     }
 
 }
