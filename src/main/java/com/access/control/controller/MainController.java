@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @ComponentScan
+@RequestMapping("/api/book")
 public class MainController {
 //    private UserService userService;
 //

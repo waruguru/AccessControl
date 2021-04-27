@@ -58,8 +58,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/authenticate").permitAll()
-                .antMatchers("/docApi/*").permitAll().
-                        antMatchers("/swagger/*").permitAll().
+                .antMatchers("/v3/api-docs/*").permitAll().
+                        antMatchers("/swagger-ui/*").permitAll().
+                antMatchers("/swagger2-demo/*").permitAll().
+                antMatchers("/swagger-ui.html").permitAll().
                 // all other requests need to be authenticated
                         anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to
