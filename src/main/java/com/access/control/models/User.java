@@ -32,14 +32,22 @@ public class User {
     private String gender;
     @Column
     private String age;
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "role_id", nullable = false)
-//    private Roles role;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id", nullable = false)
+    private Roles role;
 //    @ManyToOne
 //    @JoinColumn(name = "institution_id", nullable = false)
 //    private Institution institution;
 
     public User() {
+    }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
     }
 
     public User(String firstName, String lastName, String email, String phoneNumber, String password, String userLevel, String city, String address, String town, String gender, String age) {
