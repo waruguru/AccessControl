@@ -32,6 +32,8 @@ public class PersistenceJPAConfig {
     private String dbPassWord;
     @Value("${spring.jpa.properties.hibernate.dialect}")
     private String hibernateDialect;
+    @Value("${spring.jpa.hibernate.ddl-auto}")
+    private String springJpaHibernateDdlAuto;
 
 
     @Bean(name = "entityManagerFactory")
@@ -78,7 +80,7 @@ public class PersistenceJPAConfig {
 
     Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty("hibernate.hbm2ddl.auto", springJpaHibernateDdlAuto);
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
 
         return properties;
